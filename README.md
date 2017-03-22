@@ -15,3 +15,4 @@ Puis, il utilise le routing de zuul pour appeler un des 2 services "Hello" abonn
 L'actuator ayant été ajouté, il est donc possible d'appeler le endpoint "/shutdown" sur le service. 
 Ceci aura pour conséquence de désabonner le service de Consul.
 
+<img align="center" src="archi.png">
