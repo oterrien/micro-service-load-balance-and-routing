@@ -1,0 +1,8 @@
+<project name="consul" basedir="." default="run">
+    <target name="run">
+        <exec executable="consul.exe" dir="." resolveexecutable="true">
+            <arg line="agent"/>
+            <arg line="-dev"/>
+        </exec>
+    </target>
+</project>
