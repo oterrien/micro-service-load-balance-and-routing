@@ -14,7 +14,7 @@ ribbon:
 
 endpoints:
   health:
-    sensitive: false
+    sensitive: true
   restart:
     enabled: true
   shutdown:
@@ -25,8 +25,10 @@ management:
     enabled: false
 
 zuul:
+  ignoredServices: "*"
   routes:
     hello:
       path: /hello/**
       serviceId: hello
+      retryable: true
 

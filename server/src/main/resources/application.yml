@@ -14,7 +14,7 @@ ribbon:
 
 endpoints:
   health:
-    sensitive: false
+    sensitive: true
   restart:
     enabled: true
   shutdown:
