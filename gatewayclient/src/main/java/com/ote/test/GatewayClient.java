@@ -32,12 +32,14 @@ public class GatewayClient {
     @RequestMapping("/hello")
     public String withDiscovery() {
 
+        System.out.println("here");
+
         String serverUri = client.getInstances("gateway").stream().
                 findFirst().
                 orElseThrow(() -> new RuntimeException("No service")).
                 getUri().toString();
 
-        return this.restTemplate.getForObject(serverUri + "/hello/hello", String.class);
+        return this.restTemplate.getForObject(serverUri + "/hello-service/home", String.class);
     }
 
     public static void main(String[] args) {

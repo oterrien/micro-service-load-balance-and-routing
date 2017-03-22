@@ -27,8 +27,8 @@ management:
 zuul:
   ignoredServices: "*"
   routes:
-    hello:
-      path: /hello/**
+    hello-service:
+      path: /hello-service/**
       serviceId: hello
       retryable: true
 

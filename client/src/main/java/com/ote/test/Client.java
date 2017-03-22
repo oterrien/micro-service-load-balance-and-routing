@@ -51,7 +51,7 @@ public class Client {
                 orElseThrow(() -> new RuntimeException("No service")).
                 getUri().toString();
 
-        return this.restTemplate.getForObject(serverUri + "/hello", String.class);
+        return this.restTemplate.getForObject(serverUri + "/home", String.class);
     }
 
 
@@ -60,14 +60,14 @@ public class Client {
 
         String serverUri = loadBalancer.choose("hello").getUri().toString();
 
-        return this.restTemplate.getForObject(serverUri + "/hello", String.class);
+        return this.restTemplate.getForObject(serverUri + "/home", String.class);
     }
 
 
     @RequestMapping("/loadBalanceRest")
     public String withLoadBalanceRest() {
 
-        return this.restTemplateLB.getForObject("http://hello/hello", String.class);
+        return this.restTemplateLB.getForObject("http://hello/home", String.class);
     }
 
     public static void main(String[] args) {
