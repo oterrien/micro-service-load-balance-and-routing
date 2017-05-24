@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 public class Client {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(Client.class).web(true).run(args);
+        new SpringApplicationBuilder(Client.class).run(args);
     }
 
     @Bean

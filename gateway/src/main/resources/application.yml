@@ -8,6 +8,8 @@ spring:
     consul:
       host: localhost
       port: 8500
+      discovery:
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 
 ribbon:
   ServerListRefreshInterval: 1
@@ -28,8 +30,7 @@ management:
 zuul:
   ignoredServices: "*"
   routes:
-    hello-service:
-      path: /hello-service/**
-      serviceId: hello
+    service:
+      path: /service/**
+      serviceId: service
       retryable: true
-

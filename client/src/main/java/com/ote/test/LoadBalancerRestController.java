@@ -1,5 +1,6 @@
 package com.ote.test;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-public class WithLoadBalancer {
+@RequestMapping("/loadBalance")
+@Slf4j
+public class LoadBalancerRestController {
 
     @Autowired
     private LoadBalancerClient loadBalancer;
@@ -15,11 +18,13 @@ public class WithLoadBalancer {
     @Autowired
     private RestTemplate restTemplate;
 
-    @RequestMapping("/loadBalance/hello")
-    public String withLoadBalance() {
+    @RequestMapping("/service/home")
+    public String homeRemote() {
 
-        String serverUri = loadBalancer.choose("hello").getUri().toString();
+        log.info("Choose a service (load balancer) then call its endpoint");
 
-        return this.restTemplate.getForObject(serverUri + "/home", String.class);
+        String serviceUri = loadBalancer.choose("service").getUri().toString();
+
+        return this.restTemplate.getForObject(serviceUri + "/home", String.class);
     }
 }

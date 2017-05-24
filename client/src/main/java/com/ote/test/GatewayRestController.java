@@ -1,14 +1,16 @@
 package com.ote.test;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-public class WithDiscoveryGateway {
+@RequestMapping("/gateway")
+@Slf4j
+public class GatewayRestController {
 
     @Autowired
     private DiscoveryClient client;
@@ -16,17 +18,17 @@ public class WithDiscoveryGateway {
     @Autowired
     private RestTemplate restTemplate;
 
-    @RequestMapping("/gateway/hello")
-    public String withDiscovery() {
+    @RequestMapping("/service/home")
+    public String homeRemote() {
 
-        System.out.println("here");
+        log.info("Discover Gateway then call service's endpoint");
 
-        String serverUri = client.getInstances("gateway").stream().
+        String gatewayUri = client.getInstances("gateway").stream().
                 findFirst().
                 orElseThrow(() -> new RuntimeException("No gateway")).
                 getUri().toString();
 
-        return this.restTemplate.getForObject(serverUri + "/hello-service/home", String.class);
+        return this.restTemplate.getForObject(gatewayUri + "/service/home", String.class);
     }
 
 

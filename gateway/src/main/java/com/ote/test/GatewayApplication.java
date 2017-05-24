@@ -12,6 +12,6 @@ import org.springframework.context.annotation.Bean;
 public class GatewayApplication {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(GatewayApplication.class).web(true).run(args);
+        new SpringApplicationBuilder(GatewayApplication.class).run(args);
     }
 }

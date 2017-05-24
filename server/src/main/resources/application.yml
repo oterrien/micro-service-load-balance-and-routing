@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: hello
+    name: service
   cloud:
     consul:
       host: localhost
