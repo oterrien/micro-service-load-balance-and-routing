@@ -1,5 +1,5 @@
 server:
-  port: ${port:7070}
+  port: ${PORT:7070}
 
 spring:
   application:
@@ -13,6 +13,14 @@ spring:
 
 ribbon:
   ServerListRefreshInterval: 1
+  retryableStatusCodes: 500
+  MaxAutoRetries: 2
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: true
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  EnablePrimeConnections: true
+  eureka.enabled: false
 
 endpoints:
   health:
@@ -34,3 +42,12 @@ zuul:
       path: /service/**
       serviceId: service
       retryable: true
+  retryable: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000

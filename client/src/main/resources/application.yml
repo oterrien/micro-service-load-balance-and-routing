@@ -1,5 +1,5 @@
 server:
-  port: ${port:8090}
+  port: ${PORT:8090}
 
 spring:
   application:
@@ -12,7 +12,15 @@ spring:
         instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 
 ribbon:
-  ServerListRefreshInterval: 1000
+  ServerListRefreshInterval: 1
+  retryableStatusCodes: 500
+  MaxAutoRetries: 2
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: true
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  EnablePrimeConnections: true
+  eureka.enabled: false
 
 endpoints:
   health:
@@ -26,3 +34,11 @@ endpoints:
 management:
   security:
     enabled: false
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
